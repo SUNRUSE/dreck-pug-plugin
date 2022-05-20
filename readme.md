@@ -24,7 +24,7 @@ Add an appropriate [actions/setup-node](https://github.com/actions/setup-node) a
 
 ```yml
 name: Continuous Integration
-on: [push, pull_request]
+on: [push, pull_request, release]
 jobs:
   main:
     runs-on: ubuntu-20.04
