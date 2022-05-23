@@ -2,7 +2,7 @@ const fs = require("fs");
 
 const output = {};
 
-for (const inputPath of process.argv.slice(1)) {
+for (const inputPath of process.argv.slice(2)) {
   const inputData = fs.readFileSync(inputPath, "utf8");
 
   output[inputPath] = inputData;
