@@ -1,0 +1,1 @@
+./plugins/pug/generated/plugins/other-plugin/generated/example-template.html

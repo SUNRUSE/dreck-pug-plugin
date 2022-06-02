@@ -2,4 +2,4 @@ DRECK_PUG_INPUT_PUG_PATHS += ./plugins/other-plugin/generated/example-template.p
 
 DRECK_PUG_INPUT_LOCAL_PATHS += ./plugins/other-plugin/generated/example-local-a ./plugins/other-plugin/generated/example-local-b
 
-DRECK_GENERATED_PATHS += ./plugins/other-plugin/generated/example-template.pug ./plugins/other-plugin/generated/example-local-a ./plugins/other-plugin/generated/example-local-b
+DRECK_GENERATED_PATHS += ./plugins/other-plugin/generated/example-template.pug ./plugins/other-plugin/generated/example-local-a ./plugins/other-plugin/generated/example-local-b ./plugins/other-plugin/generated/dreck_pug_output_html_paths.txt
