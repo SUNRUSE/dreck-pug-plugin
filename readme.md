@@ -40,7 +40,7 @@ jobs:
         node-version: 12
     ###############################
 
-    - run: make --file ./dreck/makefile
+    - run: make --file ./plugins/dreck/makefile
       shell: bash
     - if: github.event_name == 'release' && github.event.action == 'created'
       uses: softprops/action-gh-release@v1
