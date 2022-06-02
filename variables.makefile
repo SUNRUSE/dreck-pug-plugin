@@ -1,1 +1,3 @@
-DRECK_INTERMEDIATE_PATHS += $(patsubst ./%.pug, ./%.html, $(filter %.pug, $(DRECK_SRC_PATHS) ${DRECK_INTERMEDIATE_PUG_PATHS}))
+DRECK_PUG_OUTPUT_HTML_PATHS += $(patsubst ./%.pug, ./plugins/pug/generated/%.html, $(DRECK_PUG_INPUT_PUG_PATHS))
+
+DRECK_GENERATED_PATHS += $(DRECK_PUG_OUTPUT_HTML_PATHS)

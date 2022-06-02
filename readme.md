@@ -1,6 +1,6 @@
 # Dreck Pug Plugin [![License](https://img.shields.io/github/license/sunruse/dreck-pug-plugin.svg)](https://github.com/sunruse/dreck-pug-plugin/blob/master/license) [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
 
-Renders all `*.pug` source files (and specific `*.pug` intermediate files) to equivalent `*.html` intermediate files (e.g. `./src/a/b.pug` renders to `./ephemeral/intermediate/a/b.html`).
+Renders specified Pug templates to equivalent HTML documents.
 
 ## Dependencies
 
@@ -40,7 +40,7 @@ jobs:
         node-version: 12
     ###############################
 
-    - run: make --file ./submodules/dreck/makefile
+    - run: make --file ./dreck/makefile
       shell: bash
     - if: github.event_name == 'release' && github.event.action == 'created'
       uses: softprops/action-gh-release@v1
@@ -53,14 +53,20 @@ jobs:
 Run the following in a Bash shell at the root of your project:
 
 ```bash
-git submodule add https://github.com/sunruse/dreck-pug-plugin submodules/plugins/pug
+git submodule add https://github.com/sunruse/dreck-pug-plugin plugins/pug
 ```
 
-## Locals
+## Input
 
-The file corresponding to each file listed within the `DRECK_HTML_VARIABLE_PATHS` Make variable will be read and available as a local within each Pug file.
+### Templates
 
-For example, if `DRECK_HTML_VARIABLE_PATHS` included `./path/to/an/example/file`, and `./path/to/an/example/file` contained the text `Example Local`, the following Pug file:
+This plugin renders every Pug file in the `DRECK_PUG_INPUT_PUG_PATHS` Make variable as an input Pug template.
+
+### Locals
+
+Each file listed in `DRECK_PUG_INPUT_LOCAL_PATHS` will be read in as a Pug local.
+
+For example, if `DRECK_PUG_INPUT_LOCAL_PATHS` included `./path/to/an/example/file`, and `./path/to/an/example/file` contained the text `Example Local`, the following Pug file:
 
 ```pug
 p #{locals[`/path/to/an/example/file`]}
@@ -72,16 +78,8 @@ Would render as:
 <p>Example Local</p>
 ```
 
-## Rendering of generated Pug files
+## Output
 
-By default, this plugin will render all `*.pug` files in `./src/**` and `./submodules/plugins/*/src/**`.
+This plugin writes an equivalent HTML document for each input Pug template.  For example, if `DRECK_PUG_INPUT_PUG_PATHS` contained `./a/b-c.pug`, `./plugins/pug/generated/a/b-c.html` would be written to disk.
 
-It can additionally render Pug files in `./ephemeral/intermediate`, but requires that their paths be appeneded to the `DRECK_INTERMEDIATE_PUG_PATHS` Make variable.
-
-For example, if `DRECK_INTERMEDIATE_PUG_PATHS` contained `./a/b.pug`, the Pug file at `./ephemeral/intermediate/a/b.pug` would be rendered to `./ephemeral/intermediate/a/b.html`.
-
-## Minification
-
-This plugin expects that another plugin will minify the generated `*.html` files and write the resulting files to the `dist` directory.  It appends the names of the generated HTML files to the Make variable `DRECK_INTERMEDIATE_HTML_PATHS` (e.g. `./src/a/b.pug` would appear in `DRECK_INTERMEDIATE_HTML_PATHS` as `./a/b.html`).
-
-TODO subdirectory checks
+Their paths are listed in the `DRECK_PUG_OUTPUT_HTML_PATHS` Make variable, space separated.

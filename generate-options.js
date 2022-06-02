@@ -8,4 +8,4 @@ for (const inputPath of process.argv.slice(2)) {
   output[inputPath] = inputData;
 }
 
-fs.writeFileSync("./submodules/plugins/pug/generated-options.json", JSON.stringify(output), "utf8");
+fs.writeFileSync("./plugins/pug/generated-options.json", JSON.stringify(output), "utf8");
